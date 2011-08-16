@@ -2,19 +2,25 @@ from setuptools import setup
 
 REQUIREMENTS = [
     'django',
+    'django-dynamic-rules',
+]
+TEST_REQUIREMENTS = [
+    'mock',
+    'lettuce',
+    'pyhamcrest',
 ]
 
 setup(
-    name="new_app",
+    name="django-dynamic-manipulation",
     version='0.0.1',
-    author="Author Name",
-    author_email="author_email",
-    description="Description for new_app.",
+    author="Matthew J Morrison & Aaron Madison",
+    author_email="mattjmorrison@mattjmorrison.com",
+    description="Record rule based dynamic manipulations.",
     long_description=open('README.txt', 'r').read(),
-    url="http://www.example.com",
-    packages=("new_app",),
+    url="https://github.com/imtapps/django-dynamic-manipulation",
+    packages=("dynamic_manipulation",),
     install_requires=REQUIREMENTS,
-    tests_require=REQUIREMENTS,
+    tests_require=TEST_REQUIREMENTS,
     test_suite='runtests.runtests',
     zip_safe=False,
     classifiers = [
