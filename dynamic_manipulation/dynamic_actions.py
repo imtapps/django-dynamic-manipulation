@@ -1,13 +1,12 @@
+
+from dynamic_rules.dynamic_actions import BaseDynamicAction
+
 from dynamic_manipulation import models
 from dynamic_manipulation.models import ManipulationLog
 
 __all__ = ('BaseDynamicManipulation',)
 
-class BaseDynamicManipulation(object):
-
-    def __init__(self, rule_model, trigger_model):
-        self.rule_model = rule_model
-        self.trigger_model = trigger_model
+class BaseDynamicManipulation(BaseDynamicAction):
 
     def clear_existing(self):
         """
