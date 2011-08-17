@@ -1,4 +1,5 @@
 from dynamic_manipulation import models
+from dynamic_manipulation.models import ManipulationLog
 
 __all__ = ('BaseDynamicManipulation',)
 
@@ -9,6 +10,11 @@ class BaseDynamicManipulation(object):
         self.trigger_model = trigger_model
 
     def clear_existing(self):
+        """
+        Both Side Effect Models and Manipulation Logs may have been
+        created for a particular rule and trigger. This method
+        deletes all of them.
+        """
         manipulation_logs = models.ManipulationLog.objects.get_by_rule(self.rule_model, self.trigger_model)
         for log in manipulation_logs:
             log.side_effect_model.delete()
@@ -16,7 +22,17 @@ class BaseDynamicManipulation(object):
 
     def run(self, *args, **kwargs):
         self.clear_existing()
-        self.do_thing()
+        self.do_manipulations()
 
-    def do_thing(self):
+    def do_manipulations(self):
+        """
+        Implement this method on your custom rule classes.
+        """
         pass
+
+    def log_manipulation(self, side_effect_model):
+        ManipulationLog.objects.create(
+            rule=self.rule_model,
+            trigger_model=self.trigger_model,
+            side_effect_model=side_effect_model,
+        )

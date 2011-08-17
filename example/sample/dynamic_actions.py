@@ -17,15 +17,11 @@ class FreeShippingPromotion(BaseDynamicManipulation):
         super(FreeShippingPromotion, self).__init__(rule_model, shopping_cart)
         self.cart = shopping_cart
 
-    def do_thing(self, *args, **kwargs):
-        # get manipulation_logs for self.rule_model and self.cart
-        # delete manipulation side effect models
-        # delete manipulation_logs
-
-        # get new side effect models
-        # create manipulation_logs
-
+    def do_manipulations(self, *args, **kwargs):
         if self.cart.total < self.rule_model.dynamic_fields['cart_total']:
             shipping_charge_amount = self.rule_model.dynamic_fields['shipping_charge']
-            models.Item.objects.create(name="shipping charge", amount=shipping_charge_amount, cart=self.cart)
+            shipping_item = models.Item.objects.create(name="shipping charge", amount=shipping_charge_amount, cart=self.cart)
+            self.log_manipulation(shipping_item)
+
+
 
