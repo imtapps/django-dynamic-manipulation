@@ -1,18 +1,11 @@
 from setuptools import setup, find_packages
 
-REQUIREMENTS = [
-    'django',
-    'django-dynamic-rules',
-]
-TEST_REQUIREMENTS = [
-    'mock',
-    'lettuce',
-    'pyhamcrest',
-]
+REQUIREMENTS = open('dependencies.txt', 'r').read().split('\n')
+TEST_REQUIREMENTS = open('test_dependencies.txt', 'r').read().split('\n')
 
 setup(
     name="django-dynamic-manipulation",
-    version='0.0.1',
+    version='0.0.2',
     author="Matthew J Morrison & Aaron Madison",
     author_email="mattjmorrison@mattjmorrison.com",
     description="Record rule based dynamic manipulations.",
