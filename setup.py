@@ -1,11 +1,13 @@
 from setuptools import setup, find_packages
 
+from dynamic_manipulation import VERSION
+
 REQUIREMENTS = open('dependencies.txt', 'r').read().split('\n')
 TEST_REQUIREMENTS = open('test_dependencies.txt', 'r').read().split('\n')
 
 setup(
     name="django-dynamic-manipulation",
-    version='0.0.2',
+    version=VERSION,
     author="Matthew J Morrison & Aaron Madison",
     author_email="mattjmorrison@mattjmorrison.com",
     description="Record rule based dynamic manipulations.",
