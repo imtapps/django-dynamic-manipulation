@@ -19,4 +19,6 @@ occurred as a result of the dynamic rule.
 
 See the example app for a sample of what this might look
 in a shopping cart application. There are lettuce tests that
-clearly show the simplified shopping cart use case.
+clearly show a simplified shopping cart use case.
+
+(run "./manage.py harvest -a sample -S" to run the lettuce tests)
