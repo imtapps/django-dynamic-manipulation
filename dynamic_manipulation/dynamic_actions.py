@@ -22,9 +22,9 @@ class BaseDynamicManipulation(object):
 
     def run(self, *args, **kwargs):
         self.clear_existing()
-        self.do_manipulations()
+        self.do_manipulations(*args, **kwargs)
 
-    def do_manipulations(self):
+    def do_manipulations(self, *args, **kwargs):
         """
         Implement this method on your custom rule classes.
         """

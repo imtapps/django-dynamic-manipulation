@@ -25,8 +25,11 @@ class BaseDynamicManipulationTests(unittest.TestCase):
     @mock.patch.object(BaseDynamicManipulation, 'clear_existing', mock.Mock())
     @mock.patch.object(BaseDynamicManipulation, 'do_manipulations')
     def test_run_calls_do_manipulations(self, do_manipulations):
-        self.manipulation.run()
-        do_manipulations.assert_called_once_with()
+        args = ["arg"]
+        kwargs = {'kwarg': 'something'}
+
+        self.manipulation.run(*args, **kwargs)
+        do_manipulations.assert_called_once_with(*args, **kwargs)
 
     @mock.patch('dynamic_manipulation.models.ManipulationLog.objects.get_by_rule')
     def test_clear_existing_gets_manipulation_logs_by_rule_model(self, get_by_rule):
