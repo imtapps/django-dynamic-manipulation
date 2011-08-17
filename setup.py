@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 REQUIREMENTS = [
     'django',
@@ -18,7 +18,7 @@ setup(
     description="Record rule based dynamic manipulations.",
     long_description=open('README.txt', 'r').read(),
     url="https://github.com/imtapps/django-dynamic-manipulation",
-    packages=("dynamic_manipulation",),
+    packages=find_packages(exclude=["example"]),
     install_requires=REQUIREMENTS,
     tests_require=TEST_REQUIREMENTS,
     test_suite='runtests.runtests',
