@@ -15,6 +15,9 @@ TEST_REQUIREMENTS = [
     'mock',
     'lettuce',
     'pyhamcrest',
+    'django-jenkins',
+    'pep8',
+    'pyflakes',
 ]
 
 def do_setup():

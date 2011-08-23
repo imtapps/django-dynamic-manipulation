@@ -44,3 +44,26 @@ INSTALLED_APPS = (
     'dynamic_rules',
     'djadmin_ext',
 )
+
+try:
+    import south
+    INSTALLED_APPS = ('south', ) + INSTALLED_APPS
+    SOUTH_TESTS_MIGRATE = False
+except ImportError:
+    pass
+
+try:
+    import django_jenkins
+    PROJECT_APPS = ('dynamic_manipulation', 'sample')
+
+    INSTALLED_APPS = INSTALLED_APPS + ('django_jenkins',)
+    JENKINS_TASKS = (
+        'django_jenkins.tasks.django_tests',
+        'django_jenkins.tasks.run_pylint',
+        'django_jenkins.tasks.run_pep8',
+        'django_jenkins.tasks.run_pyflakes',
+        'django_jenkins.tasks.with_coverage',
+    )
+
+except ImportError:
+    pass
