@@ -16,9 +16,12 @@ class BaseDynamicManipulation(BaseDynamicAction):
         """
         manipulation_logs = models.ManipulationLog.objects.get_by_rule(self.rule_model, self.trigger_model)
         for log in manipulation_logs:
-            log.side_effect_model.delete()
+            self.clear_side_effect_model(log.side_effect_model)
         manipulation_logs.delete()
 
+    def clear_side_effect_model(self, model):
+        model.delete()
+    
     def run(self, *args, **kwargs):
         self.clear_existing()
         self.do_manipulations(*args, **kwargs)
