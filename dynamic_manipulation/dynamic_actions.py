@@ -20,7 +20,13 @@ class BaseDynamicManipulation(BaseDynamicAction):
         manipulation_logs.delete()
 
     def clear_side_effect_model(self, model):
-        model.delete()
+        """
+        If the side effect model is deleted somewhere before the dynamic
+        manipulation action requests it, Django may not cascade delete,
+        so we could end up with a log without a side effect model.
+        """
+        if model:
+            model.delete()
     
     def run(self, *args, **kwargs):
         self.clear_existing()

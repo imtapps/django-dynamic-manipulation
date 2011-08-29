@@ -59,6 +59,9 @@ class BaseDynamicManipulationTests(unittest.TestCase):
         self.manipulation.clear_side_effect_model(model)
         model.delete.assert_called_once_with()
 
+    def test_clear_side_effect_model_returns_none_when_model_is_none(self):
+        self.assertEqual(None, self.manipulation.clear_side_effect_model(None))
+
     @mock.patch.object(models.ManipulationLog.objects, 'create')
     def test_log_manipulation_logs_manipulation_with_rule_trigger_model_and_side_effect_model(self, create_log):
         side_effect_model = mock.Mock()
