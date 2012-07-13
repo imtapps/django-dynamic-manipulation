@@ -15,9 +15,10 @@ TEST_REQUIREMENTS = [
     'mock',
     'lettuce',
     'pyhamcrest',
-    'django-jenkins',
     'pep8',
     'pyflakes',
+    'django_nose',
+    'nosexcover',
 ]
 
 def do_setup():
