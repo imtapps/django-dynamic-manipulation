@@ -1,4 +1,4 @@
-dynamic_manipulation#!/bin/bash
+#!/bin/bash
 
 # verify user provided a name for the virtualenv
 if [ -z "$1" ]; then
