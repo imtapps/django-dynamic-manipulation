@@ -3,3 +3,5 @@ mock
 lettuce
 pyhamcrest
 django_nose
+pycharm_testrunner
+bpython

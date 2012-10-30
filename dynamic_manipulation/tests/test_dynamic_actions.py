@@ -42,7 +42,9 @@ class BaseDynamicManipulationTests(unittest.TestCase):
     @mock.patch('dynamic_manipulation.models.ManipulationLog.objects.get_by_rule')
     def test_clear_existing_calls_clear_side_effect_for_each_log(self, get_by_rule, clear_side_effect):
         log_one = mock.Mock(spec_set=models.ManipulationLog())
+        log_one.side_effect_uri = ""
         log_two = mock.Mock(spec_set=models.ManipulationLog())
+        log_two.side_effect_uri = ""
         logs = mock.MagicMock()
         logs.__iter__.return_value = iter([log_one, log_two])
 
@@ -53,6 +55,42 @@ class BaseDynamicManipulationTests(unittest.TestCase):
             ((log_one.side_effect_model,), {}),
             ((log_two.side_effect_model,), {}),
         ], clear_side_effect.call_args_list)
+
+    @mock.patch.object(BaseDynamicManipulation, 'clear_side_effect_uri')
+    @mock.patch('dynamic_manipulation.models.ManipulationLog.objects.get_by_rule')
+    def test_clear_existing_calls_clear_side_effect_uri_when_side_effect_uri_and_no_model(self, get_by_rule, clear_side_effect):
+        log_one = models.ManipulationLog(side_effect_uri='one')
+        log_two = models.ManipulationLog(side_effect_uri='two')
+        logs = mock.MagicMock()
+        logs.__iter__.return_value = iter([log_one, log_two])
+
+        get_by_rule.return_value = logs
+
+        self.manipulation.clear_existing()
+        self.assertEqual([
+            ((log_one.side_effect_uri,), {}),
+            ((log_two.side_effect_uri,), {}),
+        ], clear_side_effect.call_args_list)
+
+    @mock.patch.object(BaseDynamicManipulation, 'clear_side_effect_model')
+    @mock.patch.object(BaseDynamicManipulation, 'clear_side_effect_uri')
+    @mock.patch('dynamic_manipulation.models.ManipulationLog.objects.get_by_rule')
+    def test_clear_existing_calls_clear_side_effect_uri_and_model_when_both_exist(self, get_by_rule, clear_uri, clear_model):
+        log_one = models.ManipulationLog(side_effect_uri='one')
+        log_two = mock.Mock(spec_set=models.ManipulationLog())
+        log_two.side_effect_uri = ""
+        logs = mock.MagicMock()
+        logs.__iter__.return_value = iter([log_one, log_two])
+
+        get_by_rule.return_value = logs
+
+        self.manipulation.clear_existing()
+        self.assertEqual([
+            ((log_one.side_effect_uri,), {}),
+        ], clear_uri.call_args_list)
+        self.assertEqual([
+            ((log_two.side_effect_model,), {}),
+        ], clear_model.call_args_list)
 
     def test_clear_side_effect_model_calls_delete_on_model(self):
         model = mock.Mock()
@@ -72,7 +110,6 @@ class BaseDynamicManipulationTests(unittest.TestCase):
             trigger_model=self.trigger_model,
             side_effect_model=side_effect_model,)
 
-
-
-        
-        
+    def test_clear_side_effect_uri_raises_not_implemented(self):
+        with self.assertRaises(NotImplementedError):
+            self.manipulation.clear_side_effect_uri("x")

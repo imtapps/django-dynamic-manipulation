@@ -16,7 +16,11 @@ class BaseDynamicManipulation(BaseDynamicAction):
         """
         manipulation_logs = models.ManipulationLog.objects.get_by_rule(self.rule_model, self.trigger_model)
         for log in manipulation_logs:
-            self.clear_side_effect_model(log.side_effect_model)
+            if log.side_effect_uri:
+                self.clear_side_effect_uri(log.side_effect_uri)
+            else:
+                self.clear_side_effect_model(log.side_effect_model)
+
         manipulation_logs.delete()
 
     def clear_side_effect_model(self, model):
@@ -27,7 +31,10 @@ class BaseDynamicManipulation(BaseDynamicAction):
         """
         if model:
             model.delete()
-    
+
+    def clear_side_effect_uri(self, uri):
+        raise NotImplementedError
+
     def run(self, *args, **kwargs):
         self.clear_existing()
         self.do_manipulations(*args, **kwargs)

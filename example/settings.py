@@ -33,6 +33,10 @@ LETTUCE_APPS = (
     'sample',
 )
 
+PROJECT_APPS = (
+    'dynamic_manipulation',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,11 +47,11 @@ INSTALLED_APPS = (
 
     'lettuce.django',
 
-    'dynamic_manipulation',
+    'dynamic_manipulation.tests.test_app',
     'dynamic_rules',
     'djadmin_ext',
     'django_nose',
-) + LETTUCE_APPS
+) + LETTUCE_APPS + PROJECT_APPS
 
 try:
     import south
