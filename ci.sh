@@ -15,9 +15,9 @@ find . -name "*.pyc" -delete
 rm -rf jenkins_reports
 mkdir jenkins_reports
 pip install -r requirements/ci.txt
-python example/manage.py test --with-xunit --xunit-file=jenkins_reports/nosetests.xml --with-xcover --cover-package=dynamic_manipulation --xcoverage-file=jenkins_reports/coverage.xml
+python example/manage.py test --with-xunit --xunit-file=jenkins_reports/TEST-nosetests.xml --with-xcover --cover-package=dynamic_manipulation --xcoverage-file=jenkins_reports/coverage.xml
 TEST_EXIT=$?
-python example/manage.py harvest -a sample -S --verbosity=3 --with-xunit --xunit-file=jenkins_reports/lettuce.xml
+python example/manage.py harvest -a sample -S --verbosity=3 --with-xunit --xunit-file=jenkins_reports/TEST-lettuce.xml
 LETTUCE_EXIT=$?
 pep8 dynamic_manipulation > jenkins_reports/pep8.report
 PEP8_EXIT=$?
