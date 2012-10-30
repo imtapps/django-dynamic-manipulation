@@ -29,6 +29,10 @@ TEMPLATE_DIRS = (
 
 SITE_ID = 1
 
+LETTUCE_APPS = (
+    'sample',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,12 +43,11 @@ INSTALLED_APPS = (
 
     'lettuce.django',
 
-    'sample',
     'dynamic_manipulation',
     'dynamic_rules',
     'djadmin_ext',
     'django_nose',
-)
+) + LETTUCE_APPS
 
 try:
     import south

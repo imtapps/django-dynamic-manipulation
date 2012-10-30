@@ -1,0 +1,5 @@
+-r dist.txt
+mock
+lettuce
+pyhamcrest
+django_nose

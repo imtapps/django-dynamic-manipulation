@@ -6,9 +6,11 @@ from django.contrib.sites import models as site_models
 
 from dynamic_rules import models as rule_models
 from sample import dynamic_actions
+from south.management.commands import patch_for_test_db_setup
 
 @before.all
 def setup_test_database():
+    patch_for_test_db_setup()
     connection.creation.create_test_db(verbosity=1, autoclobber=True)
 
 @before.each_scenario
