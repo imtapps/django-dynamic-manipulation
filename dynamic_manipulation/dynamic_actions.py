@@ -45,9 +45,15 @@ class BaseDynamicManipulation(BaseDynamicAction):
         """
         pass
 
-    def log_manipulation(self, side_effect_model):
-        ManipulationLog.objects.create(
+    def log_manipulation(self, side_effect_model=None, side_effect_uri=None):
+        data = dict(
             rule=self.rule_model,
-            trigger_model=self.trigger_model,
-            side_effect_model=side_effect_model,
-        )
+            trigger_model=self.trigger_model)
+
+        if side_effect_uri:
+            data['side_effect_uri'] = side_effect_uri
+
+        if side_effect_model:
+            data['side_effect_model'] = side_effect_model
+
+        ManipulationLog.objects.create(**data)

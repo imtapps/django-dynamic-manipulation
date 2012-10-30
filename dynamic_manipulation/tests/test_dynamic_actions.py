@@ -110,6 +110,14 @@ class BaseDynamicManipulationTests(unittest.TestCase):
             trigger_model=self.trigger_model,
             side_effect_model=side_effect_model,)
 
+    @mock.patch.object(models.ManipulationLog.objects, 'create')
+    def test_log_manipulation_logs_manipulation_with_rule_trigger_model_and_side_effect_uri(self, create_log):
+        self.manipulation.log_manipulation(side_effect_uri="asdf")
+        create_log.assert_called_once_with(
+            rule=self.rule_model,
+            trigger_model=self.trigger_model,
+            side_effect_uri="asdf",)
+
     def test_clear_side_effect_uri_raises_not_implemented(self):
         with self.assertRaises(NotImplementedError):
             self.manipulation.clear_side_effect_uri("x")
