@@ -1,7 +1,7 @@
 -r dist.txt
-mock
-lettuce
-pyhamcrest
-django_nose
-pycharm_testrunner
-bpython
+mock>=1.0.1,<2
+lettuce>=0.2.20,<1
+pyhamcrest>=1.8.0,<2
+django_nose>=1.4.2,<2
+pycharm_testrunner>=0.0.1,<1
+bpython>=0.12,<1
