@@ -23,5 +23,5 @@ class ManipulationLogUnitTests(unittest.TestCase):
         log = ManipulationLog()
         log.side_effect_model = side_effect_model
         with self.assertRaises(AssertionError):
-            with self.assertRaises(ValidationError) as e:
+            with self.assertRaises(ValidationError):
                 log.clean()

@@ -38,7 +38,7 @@ INSTALLED_APPS = (
 ) + LETTUCE_APPS + PROJECT_APPS
 
 try:
-    import south
+    import south  # noqa F401
     INSTALLED_APPS = ('south', ) + INSTALLED_APPS
     SOUTH_TESTS_MIGRATE = False
 except ImportError:
