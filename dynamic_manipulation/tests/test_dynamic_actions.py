@@ -1,13 +1,11 @@
-
 import mock
 from django.utils import unittest
 
 from dynamic_manipulation.dynamic_actions import BaseDynamicManipulation
 from dynamic_manipulation import models
 
-__all__ = (
-    'BaseDynamicManipulationTests',
-)
+__all__ = ('BaseDynamicManipulationTests', )
+
 
 class BaseDynamicManipulationTests(unittest.TestCase):
 
@@ -51,14 +49,18 @@ class BaseDynamicManipulationTests(unittest.TestCase):
         get_by_rule.return_value = logs
 
         self.manipulation.clear_existing()
-        self.assertEqual([
-            ((log_one.side_effect_model,), {}),
-            ((log_two.side_effect_model,), {}),
-        ], clear_side_effect.call_args_list)
+        self.assertEqual(
+            [
+                ((log_one.side_effect_model, ), {}),
+                ((log_two.side_effect_model, ), {}),
+            ], clear_side_effect.call_args_list
+        )
 
     @mock.patch.object(BaseDynamicManipulation, 'clear_side_effect_uri')
     @mock.patch('dynamic_manipulation.models.ManipulationLog.objects.get_by_rule')
-    def test_clear_existing_calls_clear_side_effect_uri_when_side_effect_uri_and_no_model(self, get_by_rule, clear_side_effect):
+    def test_clear_existing_calls_clear_side_effect_uri_when_side_effect_uri_and_no_model(
+        self, get_by_rule, clear_side_effect
+    ):
         log_one = models.ManipulationLog(side_effect_uri='one')
         log_two = models.ManipulationLog(side_effect_uri='two')
         logs = mock.MagicMock()
@@ -67,15 +69,19 @@ class BaseDynamicManipulationTests(unittest.TestCase):
         get_by_rule.return_value = logs
 
         self.manipulation.clear_existing()
-        self.assertEqual([
-            ((log_one.side_effect_uri,), {}),
-            ((log_two.side_effect_uri,), {}),
-        ], clear_side_effect.call_args_list)
+        self.assertEqual(
+            [
+                ((log_one.side_effect_uri, ), {}),
+                ((log_two.side_effect_uri, ), {}),
+            ], clear_side_effect.call_args_list
+        )
 
     @mock.patch.object(BaseDynamicManipulation, 'clear_side_effect_model')
     @mock.patch.object(BaseDynamicManipulation, 'clear_side_effect_uri')
     @mock.patch('dynamic_manipulation.models.ManipulationLog.objects.get_by_rule')
-    def test_clear_existing_calls_clear_side_effect_uri_and_model_when_both_exist(self, get_by_rule, clear_uri, clear_model):
+    def test_clear_existing_calls_clear_side_effect_uri_and_model_when_both_exist(
+        self, get_by_rule, clear_uri, clear_model
+    ):
         log_one = models.ManipulationLog(side_effect_uri='one')
         log_two = mock.Mock(spec_set=models.ManipulationLog())
         log_two.side_effect_uri = ""
@@ -86,10 +92,10 @@ class BaseDynamicManipulationTests(unittest.TestCase):
 
         self.manipulation.clear_existing()
         self.assertEqual([
-            ((log_one.side_effect_uri,), {}),
+            ((log_one.side_effect_uri, ), {}),
         ], clear_uri.call_args_list)
         self.assertEqual([
-            ((log_two.side_effect_model,), {}),
+            ((log_two.side_effect_model, ), {}),
         ], clear_model.call_args_list)
 
     def test_clear_side_effect_model_calls_delete_on_model(self):
@@ -108,7 +114,8 @@ class BaseDynamicManipulationTests(unittest.TestCase):
         create_log.assert_called_once_with(
             rule=self.rule_model,
             trigger_model=self.trigger_model,
-            side_effect_model=side_effect_model,)
+            side_effect_model=side_effect_model,
+        )
 
     @mock.patch.object(models.ManipulationLog.objects, 'create')
     def test_log_manipulation_logs_manipulation_with_rule_trigger_model_and_side_effect_uri(self, create_log):
@@ -116,7 +123,8 @@ class BaseDynamicManipulationTests(unittest.TestCase):
         create_log.assert_called_once_with(
             rule=self.rule_model,
             trigger_model=self.trigger_model,
-            side_effect_uri="asdf",)
+            side_effect_uri="asdf",
+        )
 
     def test_clear_side_effect_uri_raises_not_implemented(self):
         with self.assertRaises(NotImplementedError):

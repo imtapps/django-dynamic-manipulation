@@ -1,10 +1,10 @@
-
 from dynamic_rules.dynamic_actions import BaseDynamicAction
 
 from dynamic_manipulation import models
 from dynamic_manipulation.models import ManipulationLog
 
-__all__ = ('BaseDynamicManipulation',)
+__all__ = ('BaseDynamicManipulation', )
+
 
 class BaseDynamicManipulation(BaseDynamicAction):
 
@@ -46,9 +46,7 @@ class BaseDynamicManipulation(BaseDynamicAction):
         pass
 
     def log_manipulation(self, side_effect_model=None, side_effect_uri=None):
-        data = dict(
-            rule=self.rule_model,
-            trigger_model=self.trigger_model)
+        data = dict(rule=self.rule_model, trigger_model=self.trigger_model)
 
         if side_effect_uri:
             data['side_effect_uri'] = side_effect_uri

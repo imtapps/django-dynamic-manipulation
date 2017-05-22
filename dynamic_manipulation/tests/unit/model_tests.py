@@ -10,8 +10,7 @@ class ManipulationLogUnitTests(unittest.TestCase):
         log = ManipulationLog()
         with self.assertRaises(ValidationError) as error_context:
             log.clean()
-        self.assertEqual(["Side effect URI -or- Model is required."],
-            error_context.exception.messages)
+        self.assertEqual(["Side effect URI -or- Model is required."], error_context.exception.messages)
 
     def test_valid_when_side_effect_uri(self):
         log = ManipulationLog(side_effect_uri="foo")
