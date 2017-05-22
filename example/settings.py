@@ -23,38 +23,22 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 ROOT_URLCONF = 'urls'
 
-TEMPLATE_DIRS = (
-    abspath(join(parent, 'templates')),
-)
+TEMPLATE_DIRS = (abspath(join(parent, 'templates')), )
 
 SITE_ID = 1
 
-LETTUCE_APPS = (
-    'sample',
-)
+LETTUCE_APPS = ('sample', )
 
-PROJECT_APPS = (
-    'dynamic_manipulation',
-)
+PROJECT_APPS = ('dynamic_manipulation', )
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.admin',
-    'django.contrib.sites',
-    'django.contrib.staticfiles',
-
-    'lettuce.django',
-
-    'dynamic_manipulation.tests.test_app',
-    'dynamic_rules',
-    'djadmin_ext',
-    'django_nose',
+    'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions', 'django.contrib.admin',
+    'django.contrib.sites', 'django.contrib.staticfiles', 'lettuce.django', 'dynamic_manipulation.tests.test_app',
+    'dynamic_rules', 'djadmin_ext', 'django_nose',
 ) + LETTUCE_APPS + PROJECT_APPS
 
 try:
-    import south
+    import south  # noqa F401
     INSTALLED_APPS = ('south', ) + INSTALLED_APPS
     SOUTH_TESTS_MIGRATE = False
 except ImportError:

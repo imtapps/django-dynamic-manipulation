@@ -2,7 +2,6 @@ from distutils.core import setup
 from setuptools import find_packages
 from dynamic_manipulation import VERSION
 
-
 setup(
     name="django-dynamic-manipulation",
     version=VERSION,
@@ -15,7 +14,7 @@ setup(
     install_requires=file('requirements/dist.txt', 'r').read(),
     zip_safe=False,
     include_package_data=True,
-    classifiers = [
+    classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
@@ -27,4 +26,3 @@ setup(
         "Topic :: Software Development :: Libraries :: Application Frameworks",
     ]
 )
-

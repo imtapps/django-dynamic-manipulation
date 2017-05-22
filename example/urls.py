@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import patterns
 
 from django.contrib import admin
 admin.autodiscover()
@@ -6,6 +6,7 @@ admin.autodiscover()
 import dynamic_rules
 dynamic_rules.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     # url(r'^admin/', include(admin.site.urls)),
 )
