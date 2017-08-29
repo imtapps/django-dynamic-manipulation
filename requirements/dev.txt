@@ -2,6 +2,6 @@
 mock>=1.0.1,<2
 lettuce>=0.2.20,<1
 pyhamcrest>=1.8.0,<2
-django-nose>=1.4.2,<2
+django-nose==1.4.3
 pycharm-testrunner>=0.0.1,<1
 bpython>=0.12,<1
