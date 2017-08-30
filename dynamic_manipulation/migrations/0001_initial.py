@@ -13,19 +13,24 @@ class Migration(SchemaMigration):
         # Adding model 'ManipulationLog'
         db.create_table(
             'dynamic_manipulation_manipulationlog', (
-                ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)), (
+                ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+                (
                     'rule', self.gf('django.db.models.fields.related.ForeignKey')(
                         related_name='manipulation_logs', to=orm['dynamic_rules.Rule']
                     )
-                ), (
+                ),
+                (
                     'trigger_content_type', self.gf('django.db.models.fields.related.ForeignKey')(
                         related_name='manipulation_triggers', to=orm['contenttypes.ContentType']
                     )
-                ), ('trigger_model_id', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)), (
+                ),
+                ('trigger_model_id', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
+                (
                     'side_effect_content_type', self.gf('django.db.models.fields.related.ForeignKey')(
                         related_name='manipulation_side_effects', to=orm['contenttypes.ContentType']
                     )
-                ), ('side_effect_model_id', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
+                ),
+                ('side_effect_model_id', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
             )
         )
         db.send_create_signal('dynamic_manipulation', ['ManipulationLog'])
