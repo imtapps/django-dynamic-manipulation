@@ -6,7 +6,6 @@ admin.autodiscover()
 import dynamic_rules
 dynamic_rules.autodiscover()
 
-urlpatterns = patterns(
-    '',
-    # url(r'^admin/', include(admin.site.urls)),
-)
+urlpatterns = patterns('',
+                       # url(r'^admin/', include(admin.site.urls)),
+                      )
