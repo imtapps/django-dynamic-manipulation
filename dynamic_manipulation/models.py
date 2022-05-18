@@ -12,7 +12,9 @@ class ManipulationLog(models.Model):
     trigger_model_id = models.PositiveIntegerField(db_index=True)
     trigger_model = generic.GenericForeignKey(fk_field='trigger_model_id', ct_field='trigger_content_type')
 
-    side_effect_content_type = models.ForeignKey('contenttypes.ContentType', related_name="manipulation_side_effects", null=True, blank=True)
+    side_effect_content_type = models.ForeignKey(
+        'contenttypes.ContentType', related_name="manipulation_side_effects", null=True, blank=True
+    )
     side_effect_model_id = models.PositiveIntegerField(db_index=True, null=True, blank=True)
     side_effect_model = generic.GenericForeignKey(fk_field='side_effect_model_id', ct_field='side_effect_content_type')
 
